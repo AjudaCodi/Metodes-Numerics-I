@@ -1,0 +1,146 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+%\usepackage[catalan]{babel}% a la uni no funcione
+
+\usepackage{mathtools}
+\usepackage{amssymb}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+\DeclareMathOperator{\Int}{Int}
+
+\usepackage{ upgreek } % rareses, de metodes numerics, un teoric xi
+
+\usepackage{microtype}     % microtypography, reduces hyphenation
+
+\usepackage[font=small,labelformat=simple,]{caption}   % customizing captions
+
+\usepackage{titlesec}      % customizing section titles
+\titleformat{\section}{\itshape\large}{}{0em}{}
+\titlespacing{\section}{0pt}{8pt}{4pt}
+\titleformat{\subsection}{\itshape}{}{0em}{}
+\titlespacing{\subsection}{0pt}{4pt}{2pt}
+\titleformat{\subsubsection}[runin]{\bf\scshape}{}{0em}{}
+\titlespacing{\subsubsection}{0pt}{5pt}{5pt}
+
+\usepackage[papersize={3.6in,4.8in},hmargin=0.1in,vmargin={0.1in,0.1in}]{geometry}  % page geometry
+
+\usepackage{fancyhdr}   % headers and footers
+\pagestyle{fancy}
+\fancyhead{}            % clear page header
+\fancyfoot{}            % clear page footer
+
+\setlength{\abovecaptionskip}{2pt} % space above captions 
+\setlength{\belowcaptionskip}{0pt} % space below captions
+\setlength{\textfloatsep}{2pt}     % space between last top float or first bottom float and the text
+\setlength{\floatsep}{2pt}         % space left between floats
+\setlength{\intextsep}{2pt}        % space left on top and bottom of an in-text float
+%% he fotut un copy past salvatje
+
+
+
+\usepackage{amsmath} % xrightarrow
+
+\title{Mètodes Numerics I\\ Errors}
+\author{Sistach Reinsoso, Arnau}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{Introducció}
+\begin{itemize}
+\item $X$ dades
+\item $F$ càlculs
+\item $Z$ resultat
+	\subitem $X \xrightarrow{F} Z$
+\end{itemize}
+
+Suposem
+\begin{enumerate}
+\item $\exists e \in X: \widetilde{X}$
+\item $\exists e \in F: \widetilde{F}$
+	\begin{itemize}
+	\item $\widetilde{Z} = \widetilde{F} (\widetilde{X})$
+	\item $\widetilde{Z} - Z =
+		\overbrace{\widetilde{F}(\widetilde{X}) -
+			F(\widetilde{X})}^F +
+		\overbrace{F(\widetilde{X}) - F(X)}^X$
+	\end{itemize}
+\end{enumerate}
+
+
+\section{Propagació de l'error}
+\begin{itemize}
+\item Error absolut
+	\subitem $\widetilde{X} - X \equiv e, e_a, \Delta$
+\item Error relatiu
+	\subitem $\frac{e_a}{X} \equiv e_r, \delta \approx \frac{e_a}{\widetilde{X}}$
+\end{itemize}
+\subsection{Fita}
+\begin{itemize}
+\item[$\Delta$]: $\forall \varepsilon_a > 0: |\Delta| \le \varepsilon_a$
+\item[$e_r$]: $\forall \varepsilon_r > 0: |e_r| \le \varepsilon_r$
+\item Notació
+	\subitem $x = \tilde{x} \pm \varepsilon_a$ Error absolut
+	\subitem $x = \tilde{x} (1 \pm \varepsilon_r)$ Error relatiu
+\end{itemize}
+
+\subsection{Arrodonir / tallar}
+\begin{itemize}
+\item $|e_a| \le \frac{1}{2} b^{-t}$ té $t$ decimals correctes
+\item dígits significatius
+\end{itemize}
+
+\subsection{Propagació de l'error en variables}
+\begin{itemize}
+\item 1 variable
+	\begin{itemize}
+	\item Teorema
+		$$
+		\begin{rcases}
+			f:I \subset \R \to \R \text{derivable}\\
+			x, \tilde{x} \in I, x \neq \tilde{x}
+		\end{rcases}
+		\Rightarrow \exists \xi \in \Int\!\!<\!\!X, \widetilde{X}\!\!>
+		|$$$$
+		f(\widetilde{X}) - f(X) = f'(\xi) (\widetilde{X} - X)
+ 		$$
+	\item Corol·lari
+		\begin{enumerate}
+		\item $\forall x, \widetilde{x} \in I$
+			$$|f(\tilde{x}) - f(x)| \le \max_{\xi \in \Int\!\!<\!\!x,\tilde{x}\!\!>}|f'(\xi)||\Delta|$$
+		\item aproximació de 1er ordre Taylor
+			$$|\Delta f| \approx |f'(\tilde{x})||\Delta x|$$
+		\end{enumerate}
+	\end{itemize}
+\item n variables
+	\begin{itemize}
+	\item Teorema
+		$$
+		\begin{rcases}
+			f:I_1 \times I_2 \times \dots \times I_n \subset \R^n \to \R\\
+			x, \tilde{x} \in I\\
+			\Delta x = (\Delta x_1, \dots, \Delta x_n)
+		\end{rcases} \Rightarrow
+		$$
+		$$
+		\exists \theta \in (0, 1) | f(\tilde{x}) - f(x) =
+		\sum^n_k \frac{\delta f}{\delta x_k} (x + \theta \Delta x)\Delta x_k
+		$$
+	\item Corrol·lari
+		\begin{enumerate}
+		\item $|\Delta f| \le \sum_k \max |\frac{\delta f}{\delta x_k}||\Delta x_k|$
+		\item $\Delta x \approx \sum \frac{\delta f}{\delta x_k}(\tilde{x})\Delta x_k$
+			\subitem Però llavors
+			\subitem $|\Delta x| \lesssim \sum \left|\frac{\delta f}{\delta x_k}(\tilde{x})\right||\Delta x_k|$
+		\end{enumerate}
+	\end{itemize}
+\end{itemize}
+
+\end{document}
