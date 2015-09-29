@@ -1,0 +1,32 @@
+print "\nPractica 12\n"
+/* com diu l'enunciat de 3 digits significatius.. */
+scale=3;
+/* Declaro variables */
+a = .123
+b = .234
+d = .345
+e = .181
+
+c = d - b*e/a
+print "\nCalcul defecte:\n"
+print c
+print "\n"
+print d - b*e/a
+print "\nPrimer producte:\n"
+print d - (b*e)/a
+print "\n fet primer divicio:\n"
+print d - b*(e/a)
+print "\n"
+print d - (b/a)*e
+print "\n"
+
+scale=30;
+aa = .123
+ab = .234
+ad = .345
+ae = .181
+
+print "\nPrecicio de 30 decimals:\n"
+print d - b*e/a
+print "\n"
+quit

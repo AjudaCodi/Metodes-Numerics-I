@@ -1,0 +1,22 @@
+/* estudiant un cas concret */
+scale=6;
+
+a = 9.8765
+b1= 0.011111
+b2= 9.8764
+
+print "\ndif-prox, like (a - b) (a + b)\n"
+print (a - b1)*(a + b1)
+print "\n"
+print (a - b2)*(a + b2)
+print "\ndif-prox, like a^2 - b^2\n"
+print a^2 - b1^2
+print "\n"
+print a^2 - b2^2
+print "\nExacte\n"
+scale=30;
+print a^2 - b1^2
+print "\n"
+print a^2 - b2^2
+print "\n"
+quit

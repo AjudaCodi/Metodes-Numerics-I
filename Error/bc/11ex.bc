@@ -1,0 +1,12 @@
+/* l'exercici va de saber quina va millor tot i que realment tenen el mateix resultat */
+
+x = sqrt (5)
+
+print "\n2(x - 2):\n"
+print 2*(x - 2)
+print "\n-2/(x+2)^3\n"
+print 2/(x+2)^3
+print "\n-4/(9 + 4x)\n"
+print 4/(9 + 4*x)
+print "\n"
+quit
