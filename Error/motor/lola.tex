@@ -53,7 +53,8 @@
 \maketitle
 \tableofcontents
 
-\section{Introducció}
+\section{Error}
+\subsection{Introducció}
 \begin{itemize}
 \item $X$ dades
 \item $F$ càlculs
@@ -75,7 +76,7 @@ Suposem
 \end{enumerate}
 
 
-\section{Propagació de l'error}
+\subsection{Propagació de l'error}
 \begin{itemize}
 \item Error absolut
 	\subitem $\widetilde{X} - X \equiv e, e_a, \Delta$
@@ -249,7 +250,7 @@ Restar dos valors proxims.
 \item Error relatiu incrementa molt
 \end{itemize}
 
-\section{Exemples}
+\subsection{Exemples}
 Operacions aritmètiques
 \begin{itemize}
 \item Suma
@@ -299,5 +300,40 @@ Operacions aritmètiques
 			\le 0.8 \cdot 10^{-2}$
 \end{itemize}
 Si vols ser més exacte, pots veure si és monotona. Així tens una presició més bona. Tot i que dona generalment més problemes de càlcul.
+
+\subsection{Relacions de recurrència}
+Horner
+\begin{itemize}
+\item cost
+	\subitem n productes
+	\subitem n sumes
+\item Algoritme
+\item $p = a_n$
+\item $aux = 1$
+\item $\forall i = n-1, n-1, \dots , 0$
+	\begin{itemize}
+	\item $aux *= x_1$
+	\item $p += a_i * aux$
+	\end{itemize}
+\item cost
+	\subitem $n$ sumes
+	\subitem $2n$ productes
+
+\end{itemize}
+
+\subsubsection{Exemple}
+Volem calcular
+$$I_n = \int_0^1 \frac{x^n}{x+5} dx\quad n = 1, 2, \dots, 7$$
+Deduïm una recurrència
+$$I_n = \int_0^1 \frac{(x^n + 5x^{n-1}) - 5x^{n-1}}{x + 5}dx =$$
+$$\int_0^1 x^{n-1}dx -5\int_0^1 \frac{x^{n-1}}{x+5}dx = \frac{1}{n} - 5I_{n-1}$$
+$$I_n = \frac{1}{n} -5I_{n-1}$$
+$I_0 = \left. \ln (x+5)\right]_0^1 = \ln 6 -\ln 5 = \ln\frac{6}{5} \approx 0.18232$\\
+Si ara calculem $I_7 = -0.04$, negatiu, cosa que no hauria.\\
+Si volem evitar que els errors decrementin:
+$$I_{n-1} = \frac{1/n - I_n}{5}$$
+Ara hem de fer una aproximació, ja que fer la integral és complex
+$$\frac{1}{6} \frac{1}{n+1} = \int_0^1 \frac{x^n}{6} dx \le I_n \le \int_0^1 \frac{x^n}{5}dx = \frac{1}{5} \frac{1}{n+1}$$
+
 
 \end{document}

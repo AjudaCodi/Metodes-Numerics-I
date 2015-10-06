@@ -1,4 +1,2 @@
 all:
-	latex loli.tex
-	latex loli.tex
-	dvipdf loli.dvi
+	cd b; make d
