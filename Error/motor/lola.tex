@@ -334,6 +334,10 @@ Si volem evitar que els errors decrementin:
 $$I_{n-1} = \frac{1/n - I_n}{5}$$
 Ara hem de fer una aproximació, ja que fer la integral és complex
 $$\frac{1}{6} \frac{1}{n+1} = \int_0^1 \frac{x^n}{6} dx \le I_n \le \int_0^1 \frac{x^n}{5}dx = \frac{1}{5} \frac{1}{n+1}$$
+$$I_{14} \in \left[\frac{1}{90}, \frac{1}{75}\right]\quad \widetilde{I}_{14} = \frac{11}{900} \approx 0.01222$$
+$$|e_a| \le \frac{1}{2}\left[ \frac{1}{75} - \frac{1}{90}\right] = \frac{1}{900} \approx 1.1\times 10^{-2}$$
+Un cop fet de $I_{14}$ fins a $I_7$:
+$$|error| \le 1.1\times 10^{-2} (5^{-1})^7$$
 
 
 \end{document}
